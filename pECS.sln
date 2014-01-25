@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ECS", "..\..\Visual Studio 2012\Projects\ECS\ECS\ECS.vcxproj", "{D6262793-98A9-49F5-BA7F-B63D0E8EAC56}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ECSApp", "..\..\Visual Studio 2012\Projects\ECS\ECSApp\ECSApp.vcxproj", "{6F7EF9D8-575A-45B7-AE06-11A634C01C74}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pECS", "pECS.vcxproj", "{6D0B1936-F063-41E3-86A3-E4A02C2B112D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F7EF9D8-575A-45B7-AE06-11A634C01C74}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6F7EF9D8-575A-45B7-AE06-11A634C01C74}.Debug|Win32.Build.0 = Debug|Win32
+		{6F7EF9D8-575A-45B7-AE06-11A634C01C74}.Debug|Win32.Deploy.0 = Debug|Win32
+		{6F7EF9D8-575A-45B7-AE06-11A634C01C74}.Release|Win32.ActiveCfg = Release|Win32
+		{6F7EF9D8-575A-45B7-AE06-11A634C01C74}.Release|Win32.Build.0 = Release|Win32
+		{6F7EF9D8-575A-45B7-AE06-11A634C01C74}.Release|Win32.Deploy.0 = Release|Win32
+		{6D0B1936-F063-41E3-86A3-E4A02C2B112D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6D0B1936-F063-41E3-86A3-E4A02C2B112D}.Debug|Win32.Build.0 = Debug|Win32
+		{6D0B1936-F063-41E3-86A3-E4A02C2B112D}.Release|Win32.ActiveCfg = Release|Win32
+		{6D0B1936-F063-41E3-86A3-E4A02C2B112D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
