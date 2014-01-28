@@ -48,7 +48,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Russ\Documents\GitHub\pECS\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Russ\Documents\GitHub\pECS\include;C:\boost_1_55_0\;C:\boost_1_55_0\boost;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -64,7 +64,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Development\boost_1_55_0\;C:\Users\Russ\Documents\Visual Studio 2012\Projects\ECS\ECS\include\pECS;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Development\boost_1_55_0;C:\Users\Russ\Documents\GitHub\pECS\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -79,8 +79,9 @@
   <ItemGroup>
     <ClCompile Include="src\pECS\Component.cpp" />
     <ClCompile Include="src\pECS\Entity.cpp" />
-    <ClCompile Include="src\pECS\Pool\IPoolable.cpp" />
-    <ClCompile Include="src\pECS\Pool\Pool.cpp" />
+    <ClCompile Include="src\pECS\Pool\MemoryManager.cpp" />
+    <ClCompile Include="src\pECS\Pool\ObjectPool.cpp" />
+    <ClCompile Include="src\pECS\Pool\PoolReturner.cpp" />
     <ClCompile Include="src\pECS\System.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +90,12 @@
     <ClInclude Include="include\pECS\Component.h" />
     <ClInclude Include="include\pECS\Entity.h" />
     <ClInclude Include="include\pECS\EntityCollection.h" />
-    <ClInclude Include="include\pECS\Pool\IPoolable.h" />
+    <ClInclude Include="include\pECS\Pool\MemoryManager.h" />
+    <ClInclude Include="include\pECS\Pool\MemoryManagerUtility.h" />
+    <ClInclude Include="include\pECS\Pool\ObjectPool.h" />
     <ClInclude Include="include\pECS\Pool\Pool.h" />
+    <ClInclude Include="include\pECS\Pool\Poolable.h" />
+    <ClInclude Include="include\pECS\Pool\PoolReturner.h" />
     <ClInclude Include="include\pECS\System.h" />
     <ClInclude Include="include\pECS\pECS.h" />
   </ItemGroup>

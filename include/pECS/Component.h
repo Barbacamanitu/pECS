@@ -1,9 +1,9 @@
 #ifndef PECS_COMPONENT_H
 #define PECS_COMPONENT_H
-#include "Pool\IPoolable.h"
+#include <pECS\Pool\Poolable.h>
 namespace pECS
 {
-	class Component : public IPoolable
+	class Component
 {
 public:
 	Component(void);

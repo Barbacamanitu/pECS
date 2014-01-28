@@ -1,20 +1,17 @@
 #ifndef PECS_ENTITY_H
 #define PECS_ENTITY_H
-#include "Pool\IPoolable.h"
 #include <unordered_map>
 #include <typeindex>
 #include <memory>
 #include <iostream>
 #include "Component.h"
 #include "Algo\UID.h"
-#include "EntityCollection.h"
 #include <set>
-//#include <boost\uuid\uuid.hpp>
-//#include <boost\uuid\random_generator.hpp>
+#include <pECS\Pool\Poolable.h>
+
 namespace pECS
 {
-	class Entity:
-		public IPoolable
+	class Entity : public Poolable
 	{
 
 	public:
@@ -34,7 +31,6 @@ namespace pECS
 		
 		void Dump(int level);
 
-		void AddComponent(std::unique_ptr<Component>& comp);
 
 		template<class T>
 		void AddComponent(std::unique_ptr<Component>& comp)
