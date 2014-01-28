@@ -8,7 +8,7 @@
 namespace pECS
 {
 
-	class ObjectPool;
+	class FixedPool;
 
 	class MemoryManager
 	{
@@ -20,24 +20,24 @@ namespace pECS
 		{
 
 		};
-		ObjectPool* CreatePool(size_t objectCount, size_t objectSize);
+		FixedPool* CreatePool(size_t objectCount, size_t objectSize);
 
 
 
 		template<typename... Types>
-		ObjectPool* CreatePool(size_t objectCount)
+		FixedPool* CreatePool(size_t objectCount)
 		{
 			static_assert(is_base_of_all<Poolable, Types...>::value, "You may only pool Poolable objects.");
 			size_t largestSize = sizeof(largest<Types...>::type{});
 			return CreatePool(objectCount, largestSize);
 
 		}
-		void RegisterPool(ObjectPool* pool);
-		void DeregisterPool(ObjectPool* pool);
-		bool IsPoolValid(ObjectPool* pool);
+		void RegisterPool(FixedPool* pool);
+		void DeregisterPool(FixedPool* pool);
+		bool IsPoolValid(FixedPool* pool);
 
 	private:
-		std::vector<ObjectPool*> mPools;
+		std::vector<FixedPool*> mPools;
 
 
 	};

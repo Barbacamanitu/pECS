@@ -1,6 +1,6 @@
 #include <pECS\Pool\PoolReturner.h>
 #include <pECS\Pool\MemoryManager.h>
-#include <pECS\Pool\ObjectPool.h>
+#include <pECS\Pool\FixedPool.h>
 #include <iostream>
 
 namespace pECS
@@ -9,12 +9,12 @@ namespace pECS
 	PoolReturner::PoolReturner()
 	{
 		mMemoryManager = nullptr;
-		mObjectPool = nullptr;
+		mFixedPool = nullptr;
 	}
-	PoolReturner::PoolReturner(MemoryManager* manager, ObjectPool* pool)
+	PoolReturner::PoolReturner(MemoryManager* manager, FixedPool* pool)
 	{
 		mMemoryManager = manager;
-		mObjectPool = pool;
+		mFixedPool = pool;
 	}
 	PoolReturner::~PoolReturner()
 	{
@@ -24,10 +24,10 @@ namespace pECS
 	void PoolReturner::operator()(Poolable* poolable)
 	{
 		//Check if Pool is still valid.
-		if (mMemoryManager->IsPoolValid(mObjectPool))
+		if (mMemoryManager->IsPoolValid(mFixedPool))
 		{
 			//Pool is valid, remove Poolable Object
-			mObjectPool->Return(poolable);
+			mFixedPool->Return(poolable);
 
 		}
 		else

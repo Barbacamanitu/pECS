@@ -1,4 +1,4 @@
-#include <pECS\Pool\ObjectPool.h>
+#include <pECS\Pool\FixedPool.h>
 #include <pECS\Pool\MemoryManager.h>
 #include <pECS\Pool\Poolable.h>
 
@@ -7,18 +7,19 @@
 namespace pECS
 {
 
-	ObjectPool::ObjectPool(MemoryManager* manager)
+	FixedPool::FixedPool(MemoryManager* manager)
 	{
 		mMemoryManager = manager;
 		mReturner = new PoolReturner(manager, this);
+		mOverflowLimit = 0;
 	}
 
-	ObjectPool::~ObjectPool()
+	FixedPool::~FixedPool()
 	{
 		Clear();
 	}
 
-	void ObjectPool::Allocate(int count, size_t size)
+	void FixedPool::Allocate(int count, size_t size)
 	{
 		mObjectSize = size;
 		mCount = count;
@@ -30,12 +31,12 @@ namespace pECS
 		}
 	}
 
-	char * ObjectPool::GetOffset(int index)
+	char * FixedPool::GetOffset(int index)
 	{
 		return (char *)((intptr_t)mPool) + (mObjectSize * index);
 	}
 
-	bool ObjectPool::Return(Poolable * ptr)
+	bool FixedPool::Return(Poolable * ptr)
 	{
 		//intptr_t offset = (intptr_t)ptr - (intptr_t)mPool;
 		ptr->~Poolable();
@@ -47,22 +48,22 @@ namespace pECS
 		return true;
 	}
 
-	size_t ObjectPool::GetObjectSize()
+	size_t FixedPool::GetObjectSize()
 	{
 		return mObjectSize;
 	}
 
-	size_t ObjectPool::GetObjectCount()
+	size_t FixedPool::GetObjectCount()
 	{
 		return mCount;
 	}
 
-	size_t ObjectPool::GetAvailableSlots()
+	size_t FixedPool::GetAvailableSlots()
 	{
 		return mAvailable.size();
 	}
 
-	void ObjectPool::Clear()
+	void FixedPool::Clear()
 	{
 		mAvailable.clear();
 		mMemoryManager->DeregisterPool(this);

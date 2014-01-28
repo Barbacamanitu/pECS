@@ -9,17 +9,17 @@ namespace pECS
 {
 class MemoryManager;
 class Poolable;
-class ObjectPool;	
+class FixedPool;	
 
 class PoolReturner
 	{
 
 	private:
 		MemoryManager* mMemoryManager;
-		ObjectPool* mObjectPool;
+		FixedPool* mFixedPool;
 	public:
 		PoolReturner();
-		PoolReturner(MemoryManager* manager, ObjectPool* pool);
+		PoolReturner(MemoryManager* manager, FixedPool* pool);
 		~PoolReturner();
 
 		void operator()(Poolable* poolable);

@@ -1,5 +1,5 @@
-#ifndef OBJECTPOOL_H
-#define OBJECTPOOL_H
+#ifndef FixedPool_H
+#define FixedPool_H
 
 #include <vector>
 #include <memory>
@@ -9,24 +9,30 @@ namespace pECS
 {
 	class Poolable;
 	class MemoryManager;
-	class ObjectPool
+	class FixedPool
 	{
 		friend class MemoryManager;
 		friend class PoolReturner;
 	private:
+		FixedPool(MemoryManager* manager);
 		void * mPool;
 		std::vector<void *> mAvailable;
+
+		
 		size_t mObjectSize;
 		size_t mCount;
+		size_t mOverflowLimit;
+
 		MemoryManager * mMemoryManager;
 		PoolReturner* mReturner;
-		ObjectPool(MemoryManager* manager);
+
+		
 		void Clear();
 		void Allocate(int count, size_t size);
 		char * GetOffset(int index);
 		bool Return(Poolable * ptr);
 	public:
-		~ObjectPool();
+		~FixedPool();
 		size_t GetObjectSize();
 		size_t GetObjectCount();
 		size_t GetAvailableSlots();

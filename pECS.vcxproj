@@ -80,7 +80,7 @@
     <ClCompile Include="src\pECS\Component.cpp" />
     <ClCompile Include="src\pECS\Entity.cpp" />
     <ClCompile Include="src\pECS\Pool\MemoryManager.cpp" />
-    <ClCompile Include="src\pECS\Pool\ObjectPool.cpp" />
+    <ClCompile Include="src\pECS\Pool\FixedPool.cpp" />
     <ClCompile Include="src\pECS\Pool\PoolReturner.cpp" />
     <ClCompile Include="src\pECS\System.cpp" />
   </ItemGroup>
@@ -92,7 +92,7 @@
     <ClInclude Include="include\pECS\EntityCollection.h" />
     <ClInclude Include="include\pECS\Pool\MemoryManager.h" />
     <ClInclude Include="include\pECS\Pool\MemoryManagerUtility.h" />
-    <ClInclude Include="include\pECS\Pool\ObjectPool.h" />
+    <ClInclude Include="include\pECS\Pool\FixedPool.h" />
     <ClInclude Include="include\pECS\Pool\Pool.h" />
     <ClInclude Include="include\pECS\Pool\Poolable.h" />
     <ClInclude Include="include\pECS\Pool\PoolReturner.h" />
