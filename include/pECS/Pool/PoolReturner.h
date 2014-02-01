@@ -17,11 +17,12 @@ class PoolReturner
 	private:
 		MemoryManager* mMemoryManager;
 		FixedPool* mFixedPool;
+		bool mDefault;
 	public:
 		PoolReturner();
 		PoolReturner(MemoryManager* manager, FixedPool* pool);
 		~PoolReturner();
-
+		void SetDefaultDeleter();
 		void operator()(Poolable* poolable);
 
 	};

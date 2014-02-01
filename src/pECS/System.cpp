@@ -29,13 +29,7 @@ namespace pECS
 
 	bool System::IsEntityValid(Entity::Ptr const& entity)
 	{
-		if (mTypes.empty())
-			return false;
-		for (std::type_index ti : mTypes)
-		{
-			if (!entity->HasComponent(ti))
-				return false;
-		}
+		
 		return true;
 	}
 

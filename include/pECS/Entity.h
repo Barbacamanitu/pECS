@@ -7,11 +7,11 @@
 #include "Component.h"
 #include "Algo\UID.h"
 #include <set>
-#include <pECS\Pool\Poolable.h>
+#include <string>
 
 namespace pECS
 {
-	class Entity : public Poolable
+	class Entity
 	{
 
 	public:
@@ -22,72 +22,31 @@ namespace pECS
 	
 		void SetParent(Entity* parent);
 		Entity* GetParent();
-		std::set<std::type_index> const & GetComponentTypes();		
 		
 		Ptr RemoveChild(int index);
 		Ptr RemoveChild(Ptr& ent);
+		
 		void AddChild(Ptr& child);
 		std::vector<Ptr> & GetChildren();
-		
+
+		bool AddComponent(Component::Ptr& component);
+		bool RemoveComponent(std::string componentName);
+		Component::Ptr const & GetComponent(std::string componentName);
+		bool HasComponent(std::string componentName);
+		std::set<std::string> const & GetComponentTypes();
+
 		void Dump(int level);
+		
 
-
-		template<class T>
-		void AddComponent(std::unique_ptr<Component>& comp)
-		{
-			static_assert(std::is_base_of<Component, T>::value, "You may only add objects derived from Component");
-			std::type_index ti(typeid(T));
-			if (!HasComponent<T>())
-				mTypes.insert(ti);
-			mComponents.insert(std::make_pair(ti,std::move(comp)));
-		}
-
-		template<class T>
-		void RemoveComponent()
-		{
-			static_assert(std::is_base_of<Component, T>::value, "You may only remove objects derived from Component");
-			
-			std::type_index ti(typeid(T));
-			
-			auto f = mComponents.find(ti);
-			if (f != mComponents.end())
-				mComponents.erase(f);
-			
-			auto t = mTypes.find(ti);
-				if (t != mTypes.end())
-					mTypes.erase(t);
-		}
-
-		template<class T>
-		T* GetComponent()
-		{
-			auto it = mComponents.find(std::type_index(typeid(T)));
-			if (it == mComponents.end())
-				return nullptr;
-			T* tmp = dynamic_cast<T*>(it->second.get());
-			return tmp;
-		}
-
-		template<class T>
-		bool HasComponent()
-		{
-			std::type_index ti(typeid(T));
-			bool has = (mComponents.find(ti) != mComponents.end());
-			return (has);
-		}
-
-		bool HasComponent(std::type_index ti);
 
 
 
 	private:
-		//Bag of components
-		std::unordered_map<std::type_index,std::unique_ptr<Component>> mComponents;
-		std::set<std::type_index> mTypes;
+
+		std::unordered_map<std::string,std::unique_ptr<Component>> mComponents;
+		std::set<std::string> mTypes;
 		Entity* mParent;
 		std::vector<Ptr> mChildren;
-		//Entityies can contain child entities so that they can be used as a container.
-		
 		unsigned int mUID;
 	};
 }

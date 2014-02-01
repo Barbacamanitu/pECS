@@ -18,19 +18,22 @@ namespace pECS
 		void * mPool;
 		std::vector<void *> mAvailable;
 
-		
 		size_t mObjectSize;
 		size_t mCount;
-		size_t mOverflowLimit;
 
 		MemoryManager * mMemoryManager;
 		PoolReturner* mReturner;
+		PoolReturner* mDefaultDeleter;
 
 		
 		void Clear();
-		void Allocate(int count, size_t size);
+		void Allocate(size_t count, size_t size);
 		char * GetOffset(int index);
 		bool Return(Poolable * ptr);
+
+
+	
+
 	public:
 		~FixedPool();
 		size_t GetObjectSize();
@@ -38,12 +41,14 @@ namespace pECS
 		size_t GetAvailableSlots();
 
 		template<typename T>
-		using Ptr = std::unique_ptr<Poolable, PoolReturner>;
+		using Ptr = std::unique_ptr<T, PoolReturner>;
 
+		
 		template<typename T>
 		Ptr<T> Get()
 		{
-			static_assert(std::is_base_of<Poolable, T>::value, "You may only pool Poolable objects.");
+
+
 			if (sizeof(T) > mObjectSize)
 				throw(std::out_of_range("Object too large for this Pool."));
 
@@ -56,6 +61,19 @@ namespace pECS
 			mAvailable.pop_back();
 			return obj;
 		}
+
+		template<typename T>
+		Ptr<T> ForceGet()
+		{
+			Ptr<T> tObj = Get<T>();
+			if (tObj == nullptr)
+			{
+				return Ptr<T>(new T, *mDefaultDeleter);
+			}
+			else
+				return tObj;
+		}
+
 	};
 }
 

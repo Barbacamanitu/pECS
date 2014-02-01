@@ -24,6 +24,58 @@ namespace pECS
 	}
 
 
+	bool Entity::AddComponent(std::unique_ptr<Component>& component)
+	{
+		std::string cName = component->GetName();
+		if (HasComponent(cName))
+			return false;
+		mComponents.insert(std::make_pair(cName, std::move(component)));
+		mTypes.insert(cName);
+		return true;
+	}
+
+	bool Entity::RemoveComponent(std::string componentName)
+	{
+
+		auto it = mComponents.find(componentName);
+		if (it == mComponents.end())
+			return false;
+		mComponents.erase(it);
+
+		auto itt = std::find(mTypes.begin(), mTypes.end(), componentName);
+		if (itt != mTypes.end())
+		{
+			mTypes.erase(itt);
+		}
+		
+
+
+		return true;
+	}
+
+	bool Entity::HasComponent(std::string componentName)
+	{
+		auto it = mComponents.find(componentName);
+		if (it == mComponents.end())
+			return false;
+		return true;
+	}
+
+	Component::Ptr const & Entity::GetComponent(std::string componentName)
+	{
+		auto it = mComponents.find(componentName);
+		if (it == mComponents.end())
+			return nullptr;
+		return it->second;
+	}
+
+	std::set<std::string> const & Entity::GetComponentTypes()
+	{
+		return mTypes;
+	}
+
+
+
 	void Entity::Dump(int level)
 	{
 		//Entity information
@@ -41,7 +93,7 @@ namespace pECS
 		for (auto it = mComponents.begin(); it != mComponents.end(); it++)
 		{
 			count++;
-			std::cout<<spaces<<count<<") Type:["<<it->first.name()<<"]\n";
+			std::cout<<spaces<<count<<") Type:["<<it->first<<"]\n";
 		}
 
 		std::cout<<spaces<<"Children: "<<mChildren.size()<<"\n";
@@ -56,17 +108,7 @@ namespace pECS
 
 	}
 
-	std::set<std::type_index> const & Entity::GetComponentTypes()
-	{
-		return mTypes;
-	}
-
-	bool Entity::HasComponent(std::type_index ti)
-	{
-		bool has = (mComponents.find(ti) != mComponents.end());
-		return (has);
-	}
-
+	
 	
 
 	void Entity::AddChild(Entity::Ptr& child)

@@ -3,7 +3,6 @@
 #include <pECS\Pool\Poolable.h>
 
 
-
 namespace pECS
 {
 
@@ -11,7 +10,10 @@ namespace pECS
 	{
 		mMemoryManager = manager;
 		mReturner = new PoolReturner(manager, this);
-		mOverflowLimit = 0;
+		mDefaultDeleter = new PoolReturner(manager, this);
+		mDefaultDeleter->SetDefaultDeleter();
+
+		
 	}
 
 	FixedPool::~FixedPool()
@@ -19,7 +21,7 @@ namespace pECS
 		Clear();
 	}
 
-	void FixedPool::Allocate(int count, size_t size)
+	void FixedPool::Allocate(size_t count, size_t size)
 	{
 		mObjectSize = size;
 		mCount = count;
@@ -38,15 +40,16 @@ namespace pECS
 
 	bool FixedPool::Return(Poolable * ptr)
 	{
-		//intptr_t offset = (intptr_t)ptr - (intptr_t)mPool;
+		intptr_t offset = (intptr_t)ptr - (intptr_t)mPool;
 		ptr->~Poolable();
-		//if (offset < 0 || offset >= mCount)
-			//return false;
+		if (offset < 0 || offset >= mCount)
+			return false;
 
 
 		mAvailable.push_back(ptr);
 		return true;
 	}
+
 
 	size_t FixedPool::GetObjectSize()
 	{

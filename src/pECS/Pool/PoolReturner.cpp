@@ -10,24 +10,36 @@ namespace pECS
 	{
 		mMemoryManager = nullptr;
 		mFixedPool = nullptr;
+		mDefault = false;
 	}
 	PoolReturner::PoolReturner(MemoryManager* manager, FixedPool* pool)
 	{
 		mMemoryManager = manager;
 		mFixedPool = pool;
+		mDefault = false;
 	}
 	PoolReturner::~PoolReturner()
 	{
 
 	}
 
+	void PoolReturner::SetDefaultDeleter()
+	{
+		mDefault = true;
+	}
+
 	void PoolReturner::operator()(Poolable* poolable)
 	{
+		if (mDefault)
+		{
+			delete poolable;
+			return;
+		}
 		//Check if Pool is still valid.
 		if (mMemoryManager->IsPoolValid(mFixedPool))
 		{
 			//Pool is valid, remove Poolable Object
-			mFixedPool->Return(poolable);
+				mFixedPool->Return(poolable);
 
 		}
 		else

@@ -78,18 +78,23 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\pECS\Component.cpp" />
+    <ClCompile Include="src\pECS\ComponentTypeManager.cpp" />
     <ClCompile Include="src\pECS\Entity.cpp" />
+    <ClCompile Include="src\pECS\EntityFactory.cpp" />
+    <ClCompile Include="src\pECS\EntityTemplate.cpp" />
     <ClCompile Include="src\pECS\Pool\MemoryManager.cpp" />
     <ClCompile Include="src\pECS\Pool\FixedPool.cpp" />
     <ClCompile Include="src\pECS\Pool\PoolReturner.cpp" />
     <ClCompile Include="src\pECS\System.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\pECS\ComponentTypeManager.h" />
+    <ClInclude Include="include\pECS\EntityFactory.h" />
+    <ClInclude Include="include\pECS\EntityTemplate.h" />
     <ClInclude Include="include\pECS\Logger.h" />
     <ClInclude Include="include\pECS\Algo\UID.h" />
     <ClInclude Include="include\pECS\Component.h" />
     <ClInclude Include="include\pECS\Entity.h" />
-    <ClInclude Include="include\pECS\EntityCollection.h" />
     <ClInclude Include="include\pECS\Pool\MemoryManager.h" />
     <ClInclude Include="include\pECS\Pool\MemoryManagerUtility.h" />
     <ClInclude Include="include\pECS\Pool\FixedPool.h" />
